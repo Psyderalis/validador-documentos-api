@@ -1,0 +1,25 @@
+{
+  "name": "validador-documentos-api",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Psyderalis/validador-documentos-api#readme",
+  "bugs": {
+    "url": "https://github.com/Psyderalis/validador-documentos-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Psyderalis/validador-documentos-api.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0"
+  }
+}
