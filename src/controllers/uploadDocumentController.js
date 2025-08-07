@@ -2,10 +2,14 @@ const uploadDocumentService = require('../services/uploadDocumentService')
 
 const uploadDocument = async (req, res) => {
     try {
-        const result = uploadDocumentService.uploadADocument()
+        const file = req.file
+        if(!file) return res.status(400).json({error: 'Archivo no subido'})
+            
+        const result = await uploadDocumentService.uploadADocument(file)
         res.status(201).json(result)
-    } catch (error) {
-        res.status(500).json({ error: error.message })
+    } catch (err) {
+        console.error('Error en controlador:', err)
+        res.status(500).json({ error: err.message })
     }
 }
 
