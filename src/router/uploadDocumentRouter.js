@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { uploadDocument } = require('../controllers/uploadDocumentController')
+const uploadDocumentController = require('../controllers/uploadDocumentController')
+const uploadMiddleware = require('../middlewares/uploadMiddleware')
 
-router.post('/', uploadDocument)
+router.post('/', uploadMiddleware, uploadDocumentController.uploadDocument)
 
-module.exports = router
+module.exports = router 
