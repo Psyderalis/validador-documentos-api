@@ -60,13 +60,4 @@ const metadataAnalizer = async (filePath) => {
 
 }
 
-// Promise.all([
-//     metadataAnalizer('uploads/doc01034320250402103748.pdf'),
-//     metadataAnalizer('uploads/20250510_130650.jpg'),
-//     metadataAnalizer('uploads/document-1754686192710.jpg'),
-//     metadataAnalizer('uploads/REVISIÓN CAMIÓN .jpg'),
-//     metadataAnalizer('uploads/XF-3607 (1).jpg')
-// ]).then(results => {
-//     console.log(results)
-//     exiftool.end()
-// })
+module.exports = { metadataAnalizer }

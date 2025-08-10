@@ -5,7 +5,7 @@ const uploadMiddleware = (req, res, next) => {
         if (err) {
             if (err.code === 'INVALID_FILE_TYPE') return res.status(400).json({ error: err.message });
 
-            return res.status(500).json({ error: 'Error al subir el archivo.' })
+            return res.status(500).json({ error: `Error al subir el archivo: ${err.message}` })
         }
         next()
     })
