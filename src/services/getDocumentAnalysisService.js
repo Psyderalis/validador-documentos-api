@@ -1,14 +1,18 @@
 const { metadataAnalizer } = require("../utils/metadataAnalizer")
+const { fileTextAnalizer } = require("../utils/fileTextAnalizer")
 
 const getDocumentAnalysis = async (name) => {
     const path = `uploads/${name}`
-    const documentAnalysis = await metadataAnalizer(path)
+    const metadataAnalysis = await metadataAnalizer(path)
+    const textAnalysis = await fileTextAnalizer(path)
 
-    console.log(`Resultado de análisis del documento ${name}: `, documentAnalysis)
+    console.log(`Resultado de análisis metadata documento ${name}: `, metadataAnalysis)
+
+    console.log(`Resultado de análisis texto documento ${name}: `, textAnalysis)
 
     return {
         name,
-        isValid: documentAnalysis.valid
+        isValid: metadataAnalysis.valid && textAnalysis.valid 
     }
 }
 
