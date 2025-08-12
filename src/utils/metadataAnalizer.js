@@ -1,4 +1,4 @@
-const { exiftool } = require("exiftool-vendored")
+import { exiftool } from 'exiftool-vendored';
 
 const metadataAnalizer = async (filePath) => {
     const fileResults = {
@@ -60,4 +60,4 @@ const metadataAnalizer = async (filePath) => {
 
 }
 
-module.exports = { metadataAnalizer }
+export { metadataAnalizer }

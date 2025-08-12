@@ -1,14 +1,14 @@
 /* env */
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
 /* multer */
-const multer = require('multer');
-const path = require('path');
-const fileFilter = require('./utils/fileFilter');
+import multer from 'multer';
+import path from 'path';
+import { fileFilter } from './utils/fileFilter.js';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage, fileFilter });
 
 /* module exports */
-module.exports = {
+export {
     PORT,
     upload
 }
