@@ -13,5 +13,3 @@ app.use('/api/documents', router)
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
 })
-
-process.on('exit', () => exiftool.end())

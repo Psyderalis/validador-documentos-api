@@ -8,9 +8,10 @@ const metadataAnalizer = async (filePath) => {
         signals: [],
 
     }
+    let metadata
     try {
         // Read metadata
-        const metadata = await exiftool.read(filePath);
+        metadata = await exiftool.read(filePath);
 
         // Check for specific metadata signals
 
@@ -55,9 +56,15 @@ const metadataAnalizer = async (filePath) => {
         fileResults.valid = false
         fileResults.signals.push(`Error al leer metadatos: ${error.message}`)
         console.error(error)
+    } finally {
+        metadata && exiftool.end()
     }
     return fileResults
 
 }
+
+// metadataAnalizer('uploads/17531115671954167090193018537762 - Malvado.jpg').then(res => console.log(res))
+
+// metadataAnalizer('uploads/Revisión técnica LYTT98 - malvado.pdf').then(res => console.log(res))
 
 export { metadataAnalizer }
