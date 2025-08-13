@@ -1,5 +1,6 @@
-const { createWorker, setLogging } = require('tesseract.js');
-const { parseDate } = require('./parseDate');
+import { createWorker } from 'tesseract.js'
+import { parseDate } from './parseDate.js'
+
 
 const runOCR = async (imagePath) => {
     let worker
@@ -23,12 +24,11 @@ const fileTextAnalizer = async (filePath) => {
         signals: [],
     }
     const text = await runOCR(filePath)
-    console.log(text)
 
     const datesText = text.match(/\b\d{1,2}\s+(ENERO|FEBRERO|MARZO|ABRIL|MAYO|JUNIO|JULIO|AGOSTO|SEPTIEMBRE|OCTUBRE|NOVIEMBRE|DICIEMBRE)\s+\d{4}\b/g) || [];
     const dateSlash = text.match(/\b(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}\b/g) || [];
 
-     const isCertificadoTitle = /CERTIFICADO\s+DE\s+REVISIÓN\s+TÉCNICA/g.test(text)
+    const isCertificadoTitle = /CERTIFICADO\s+DE\s+REVISIÓN\s+TÉCNICA/g.test(text)
 
     if (!isCertificadoTitle) {
         fileResults.valid = false
@@ -74,8 +74,4 @@ const fileTextAnalizer = async (filePath) => {
     return fileResults
 }
 
-module.exports = { fileTextAnalizer }
-
-// (async () => {
-//     console.log(await fileTextAnalizer('uploads/document-1754949151366.jpg'))
-// })()
+export { fileTextAnalizer }

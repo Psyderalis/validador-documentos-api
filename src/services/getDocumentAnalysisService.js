@@ -1,7 +1,7 @@
-const { metadataAnalizer } = require("../utils/metadataAnalizer")
-const { fileTextAnalizer } = require("../utils/fileTextAnalizer")
+import { metadataAnalizer } from '../utils/metadataAnalizer.js';
+import { fileTextAnalizer } from '../utils/fileTextAnalizer.js';
 
-const getDocumentAnalysis = async (name) => {
+const getDocumentAnalysisService = async (name) => {
     const path = `uploads/${name}`
     const metadataAnalysis = await metadataAnalizer(path)
     const textAnalysis = await fileTextAnalizer(path)
@@ -16,4 +16,4 @@ const getDocumentAnalysis = async (name) => {
     }
 }
 
-module.exports = { getDocumentAnalysis }
+export { getDocumentAnalysisService }

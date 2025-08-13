@@ -12,7 +12,7 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node --watch src/app.js",
@@ -24,6 +24,7 @@
     "exiftool-vendored": "^30.3.0",
     "express": "^5.1.0",
     "multer": "^2.0.2",
+    "pdf2pic": "^3.2.0",
     "tesseract.js": "^6.0.1"
   }
 }

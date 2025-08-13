@@ -1,4 +1,4 @@
-const { upload } = require('../config')
+import { upload } from '../config.js';
 
 const uploadMiddleware = (req, res, next) => {
     upload.single('document')(req, res, (err) => {
@@ -11,4 +11,4 @@ const uploadMiddleware = (req, res, next) => {
     })
 }
 
-module.exports = uploadMiddleware
+export { uploadMiddleware }
