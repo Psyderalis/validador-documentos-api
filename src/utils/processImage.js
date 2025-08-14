@@ -1,10 +1,10 @@
 import sharp from 'sharp'
 import path from 'path'
 
-export async function preprocessImage(inputPath) {
+const preprocessImage = async (inputPath) => {
     const outputPath = path.join(
         path.dirname(inputPath),
-        'pre_' + path.basename(inputPath, path.extname(inputPath)) + '.png'
+        'pro_' + path.basename(inputPath, path.extname(inputPath)) + '.png'
     )
 
     await sharp(inputPath)
@@ -12,11 +12,11 @@ export async function preprocessImage(inputPath) {
         .grayscale()
         .normalize()
         .modulate({
-            brightness: 1.5,
+            brightness: 1.2,
         })
         .toFile(outputPath)
 
     return outputPath
 }
 
-// preprocessImage('uploads/20250510_130650.jpg').then(res => console.log(res))
+export { preprocessImage }

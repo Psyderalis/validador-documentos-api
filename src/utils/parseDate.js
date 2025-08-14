@@ -1,16 +1,20 @@
+// Mapa de months texto a número (0-based para JS Date)
 const months = {
     ENERO: 0, FEBRERO: 1, MARZO: 2, ABRIL: 3, MAYO: 4, JUNIO: 5,
     JULIO: 6, AGOSTO: 7, SEPTIEMBRE: 8, OCTUBRE: 9, NOVIEMBRE: 10, DICIEMBRE: 11
 }
 
 const parseDate = (date) => {
-    // Mapa de months texto a número (0-based para JS Date)
 
-    const isTextDate = /\b\d{1,2}\s+(ENERO|FEBRERO|MARZO|ABRIL|MAYO|JUNIO|JULIO|AGOSTO|SEPTIEMBRE|OCTUBRE|NOVIEMBRE|DICIEMBRE)\s+\d{4}\b/g.test(date)
+    if (!date) return null
+
+    const isTextDate = /\b\d{1,2}(?: DE)?\s+(ENERO|FEBRERO|MARZO|ABRIL|MAYO|JUNIO|JULIO|AGOSTO|SEPTIEMBRE|OCTUBRE|NOVIEMBRE|DICIEMBRE)(?: DE)?\s+\d{4}\b/g.test(date)
+
     const isSlashDate = (/\b(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}\b/g).test(date)
 
     if (isTextDate) {
-        const parts = date.toUpperCase().split(' ')
+        const normalizedDate = date.toUpperCase().replace(/\sDE\s/g, ' ')
+        const parts = normalizedDate.split(' ')
         if (parts.length !== 3) return null
         const day = parseInt(parts[0], 10)
         const month = months[parts[1]]
@@ -30,7 +34,7 @@ const parseDate = (date) => {
         return new Date(year, month, day)
 
     } else {
-        console.error('Fecha no válida')
+        console.error('Error en ParseDate: Fecha no válida,', date)
         return null
     }
 }

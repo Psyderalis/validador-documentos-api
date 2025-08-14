@@ -2,11 +2,9 @@ import { exiftool } from 'exiftool-vendored';
 
 const metadataAnalizer = async (filePath) => {
     const fileResults = {
-        filePath,
         valid: true,
-        score: 0,
         signals: [],
-
+        score: 0
     }
     let metadata
     try {
@@ -48,22 +46,15 @@ const metadataAnalizer = async (filePath) => {
             fileResults.signals.push(`Puntuación alta de sospecha: ${fileResults.score}`)
         } else {
             fileResults.valid = true
-            fileResults.signals.push(`Puntuación baja de sospecha: ${fileResults.score}`)
         }
 
     } catch (error) {
         fileResults.valid = false
         fileResults.signals.push(`Error al leer metadatos: ${error.message}`)
         console.error(error)
-    } finally {
-        metadata && exiftool.end()
     }
+
     return fileResults
-
 }
-
-// metadataAnalizer('uploads/17531115671954167090193018537762 - Malvado.jpg').then(res => console.log(res))
-
-// metadataAnalizer('uploads/malvado.jpg').then(res => console.log(res))
 
 export { metadataAnalizer }
