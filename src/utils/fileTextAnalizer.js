@@ -1,34 +1,15 @@
-import { createWorker } from 'tesseract.js'
 import { parseDate } from './parseDate.js'
 
-
-const runOCR = async (imagePath) => {
-    let worker
-    try {
-        worker = await createWorker('spa')
-        const { data: { text } } = await worker.recognize(imagePath)
-
-        return text
-    } catch (err) {
-        console.error("Error en OCR:", err)
-        return null
-    } finally {
-        worker && await worker.terminate()
-    }
-}
-
-const fileTextAnalizer = async (filePath) => {
+const fileTextAnalizer = (text) => {
     const fileResults = {
-        filePath,
         valid: true,
         signals: [],
     }
-    const text = await runOCR(filePath)
-    // console.log(text)
 
     const datesText = text.match(
         /\b\d{1,2}(?: DE)?\s+(ENERO|FEBRERO|MARZO|ABRIL|MAYO|JUNIO|JULIO|AGOSTO|SEPTIEMBRE|OCTUBRE|NOVIEMBRE|DICIEMBRE)(?: DE)?\s+\d{4}\b/g
     ) || []
+
     const dateSlash = text.match(/\b(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}\b/g) || []
 
     const isCertificadoTitle = /CERTIFICADO\s+DE\s+REVISIÓN\s+TÉCNICA/g.test(text)
@@ -54,6 +35,14 @@ const fileTextAnalizer = async (filePath) => {
     const signatureDate = dateSlash[0] ? parseDate(dateSlash[0]) : null
     const expirationDate = datesText[1] ? parseDate(datesText[1]) : null
 
+    if (!issueDate) fileResults.signals.push('Fecha de emisión inválida')
+    if (!signatureDate) fileResults.signals.push('Fecha de firma inválida')
+    if (!expirationDate) fileResults.signals.push('Fecha de vencimiento inválida')
+
+    if (!issueDate || !signatureDate || !expirationDate) {
+        fileResults.valid = false
+        return fileResults
+    }
     // comparar fecha de firma con fecha de emisión
     if (issueDate.getTime() !== signatureDate.getTime()) {
         fileResults.valid = false
@@ -77,7 +66,5 @@ const fileTextAnalizer = async (filePath) => {
     return fileResults
 }
 
-// fileTextAnalizer('uploads/pre_20250510_130650.png').then(res => console.log(res))
-
-export { fileTextAnalizer, runOCR }
+export { fileTextAnalizer }
 

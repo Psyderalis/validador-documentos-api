@@ -1,11 +1,13 @@
 import express from 'express'
 const router = express.Router()
-import { uploadDocumentController } from '../controllers/uploadDocumentController.js'
+
+import { uploadDocumentController } from '../controllers/documentController.js'
+import { getDocumentAnalysisController } from '../controllers/documentController.js'
 import { uploadMiddleware } from '../middlewares/uploadMiddleware.js'
-import { getDocumentAnalysis } from '../controllers/getDocumentAnalysisController.js'
+
 
 
 router.post('/', uploadMiddleware, uploadDocumentController)
-router.get('/:documentName', getDocumentAnalysis)
+router.get('/:documentName', getDocumentAnalysisController)
 
 export { router }
