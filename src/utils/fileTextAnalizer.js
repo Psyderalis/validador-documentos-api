@@ -79,5 +79,5 @@ const fileTextAnalizer = async (filePath) => {
 
 // fileTextAnalizer('uploads/pre_20250510_130650.png').then(res => console.log(res))
 
-export { fileTextAnalizer }
+export { fileTextAnalizer, runOCR }
 

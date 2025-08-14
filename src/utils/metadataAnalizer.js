@@ -51,7 +51,6 @@ const metadataAnalizer = async (filePath) => {
             fileResults.signals.push(`Puntuación baja de sospecha: ${fileResults.score}`)
         }
 
-
     } catch (error) {
         fileResults.valid = false
         fileResults.signals.push(`Error al leer metadatos: ${error.message}`)
@@ -65,6 +64,6 @@ const metadataAnalizer = async (filePath) => {
 
 // metadataAnalizer('uploads/17531115671954167090193018537762 - Malvado.jpg').then(res => console.log(res))
 
-// metadataAnalizer('uploads/Revisión técnica LYTT98 - malvado.pdf').then(res => console.log(res))
+// metadataAnalizer('uploads/malvado.jpg').then(res => console.log(res))
 
 export { metadataAnalizer }
