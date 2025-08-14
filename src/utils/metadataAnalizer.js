@@ -64,6 +64,6 @@ const metadataAnalizer = async (filePath) => {
 
 // metadataAnalizer('uploads/17531115671954167090193018537762 - Malvado.jpg').then(res => console.log(res))
 
-metadataAnalizer('uploads/malvado.jpg').then(res => console.log(res))
+// metadataAnalizer('uploads/malvado.jpg').then(res => console.log(res))
 
 export { metadataAnalizer }

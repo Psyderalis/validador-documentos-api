@@ -19,4 +19,4 @@ export async function preprocessImage(inputPath) {
     return outputPath
 }
 
-preprocessImage('uploads/20250510_130650.jpg').then(res => console.log(res))
+// preprocessImage('uploads/20250510_130650.jpg').then(res => console.log(res))
