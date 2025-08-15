@@ -13,7 +13,7 @@ const qrReader = async (imagePath) => {
         const qrCode = jsQR(new Uint8ClampedArray(data), info.width, info.height)
 
         if (qrCode) {
-            console.log('qr: ', qrCode.data)
+            // console.log('qr: ', qrCode.data)
             return qrCode.data
         } else {
             // console.log('no hay qr')

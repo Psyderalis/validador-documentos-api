@@ -16,17 +16,22 @@ const getDocumentAnalysisService = async (name) => {
         const metadataAnalysis = await metadataAnalizer(filePath)
 
         if (ext === '.pdf') { filePath = await pdfToImgConverter(filePath) }
+        const qrUrl = await qrReader(filePath)
 
         filePath = await preprocessImage(filePath)
 
-        const qrUrl = await qrReader(filePath)
+
         const text = await extractTextOCR(filePath)
-        const textAnalysis = fileTextAnalizer(text)
+        // const textAnalysis = fileTextAnalizer(text)
         const qrAnalysis = textVsQRAnalyzer(text, qrUrl)
 
-        const allSignals = [...metadataAnalysis.signals, ...textAnalysis.signals, ...qrAnalysis.signals]
+        const allSignals = [
+            ...metadataAnalysis.signals,
+            // ...textAnalysis.signals, 
+            ...qrAnalysis.signals]
 
-        analysisResult.valid = metadataAnalysis.valid && textAnalysis.valid && qrAnalysis.valid
+        // analysisResult.valid = metadataAnalysis.valid && textAnalysis.valid && qrAnalysis.valid´
+        analysisResult.valid = metadataAnalysis.valid && qrAnalysis.valid
         analysisResult.signals = allSignals
 
         console.log(analysisResult)

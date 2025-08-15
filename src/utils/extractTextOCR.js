@@ -6,7 +6,7 @@ const extractTextOCR = async (imagePath) => {
         worker = await createWorker('spa')
         const { data: { text } } = await worker.recognize(imagePath)
         // console.log('se extrajo el texto')
-        console.log(text)
+        // console.log(text)
         return text
     } catch (err) {
         console.error("Error en OCR:", err)
