@@ -1,5 +1,6 @@
 import path from "path";
 import { fromPath } from "pdf2pic";
+import { unlink } from 'fs/promises';
 
 const pdfToImgConverter = async (pdfPath) => {
 
@@ -17,12 +18,22 @@ const pdfToImgConverter = async (pdfPath) => {
   try {
     const result = await convert(pageToConvert, { responseType: "image" })
     // console.log("pdf a img: ", result.path)
+    try {
+      await unlink(pdfPath)
+
+    } catch (err) {
+      console.error('Error al borrar el archivo:', err)
+    }
     return result.path
+
+
   } catch (err) {
     console.error("Error convirtiendo PDF:", err);
     throw new Error(`Error convirtiendo PDF: ${err.message}`);
 
   }
+
+
 }
 
 export { pdfToImgConverter }

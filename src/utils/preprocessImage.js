@@ -1,5 +1,6 @@
 import sharp from 'sharp'
 import path from 'path'
+import { unlink } from 'fs/promises'
 
 const preprocessImage = async (inputPath) => {
     const outputPath = path.join(
@@ -15,6 +16,11 @@ const preprocessImage = async (inputPath) => {
                 brightness: 1.2,
             })
             .toFile(outputPath)
+        try {
+            await unlink(inputPath)
+        } catch (err) {
+            console.error('Error al borrar el archivo:', err)
+        }
 
         return outputPath
     } catch (error) {
