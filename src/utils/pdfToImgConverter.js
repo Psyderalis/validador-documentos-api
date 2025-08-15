@@ -16,11 +16,12 @@ const pdfToImgConverter = async (pdfPath) => {
 
   try {
     const result = await convert(pageToConvert, { responseType: "image" })
-    console.log("Page 1 is now converted as image:", result.path)
-    return result
+    // console.log("pdf a img: ", result.path)
+    return result.path
   } catch (err) {
     console.error("Error convirtiendo PDF:", err);
-    throw err
+    throw new Error(`Error convirtiendo PDF: ${err.message}`);
+
   }
 }
 

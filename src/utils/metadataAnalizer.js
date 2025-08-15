@@ -47,14 +47,12 @@ const metadataAnalizer = async (filePath) => {
         } else {
             fileResults.valid = true
         }
-
+        // console.log('met-an: ', fileResults)
+        return fileResults
     } catch (error) {
-        fileResults.valid = false
-        fileResults.signals.push(`Error al leer metadatos: ${error.message}`)
-        console.error(error)
+        console.error("Error al leer metadata:", error)
+        throw new Error(`Error al leer metadata: ${err.message}`)
     }
-
-    return fileResults
 }
 
 export { metadataAnalizer }

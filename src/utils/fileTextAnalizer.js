@@ -41,6 +41,7 @@ const fileTextAnalizer = (text) => {
 
     if (!issueDate || !signatureDate || !expirationDate) {
         fileResults.valid = false
+        fileResults.signals.push('Fechas inválidas o no parseables')
         return fileResults
     }
     // comparar fecha de firma con fecha de emisión
@@ -62,6 +63,7 @@ const fileTextAnalizer = (text) => {
         fileResults.valid = false
         fileResults.signals.push('Fecha de vencimiento mayor a un año desde fecha de emisión')
     }
+    // console.log('text-an: ', fileResults)
 
     return fileResults
 }
