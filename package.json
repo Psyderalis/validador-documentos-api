@@ -19,11 +19,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "canvas": "^3.1.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "exiftool-vendored": "^30.3.0",
     "express": "^5.1.0",
+    "jsqr": "^1.4.0",
     "multer": "^2.0.2",
+    "pdf-poppler": "^0.2.1",
+    "pdf2pic": "^3.2.0",
+    "pdfjs-dist": "^5.4.54",
     "sharp": "^0.34.3",
     "tesseract.js": "^6.0.1"
   }
