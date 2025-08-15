@@ -5,6 +5,13 @@ const textVsQRAnalyzer = (text, url) => {
         signals: [],
     }
 
+    if (!url) {
+        fileResults.valid = false
+        fileResults.signals.push('No se encontró QR en la imagen.')
+        // console.log('no hay url: ', fileResults)
+        return fileResults
+    }
+
     try {
         const regexBeforeCertificadoTitle = /([\s\S]*?)CERTIFICADO/i
         const matchBeforeCertificadoTitle = text.match(regexBeforeCertificadoTitle)
@@ -25,21 +32,20 @@ const textVsQRAnalyzer = (text, url) => {
             patenteUrl = urlObj.searchParams.get("patente") || ''
         } catch (err) {
             console.error('URL inválida:', url)
-            fileResults.valid = false
-            fileResults.signals.push('URL inválida')
+            throw new Error('URL inválida:', url);
+
         }
 
         if (patenteOcr && patenteUrl && (patenteOcr !== patenteUrl)) {
             fileResults.valid = false
             fileResults.signals.push('No coincide la patente del documento con el código QR')
         }
+        // console.log('tx-qr-an: ', fileResults)
+        return fileResults
     } catch (error) {
         console.error('Error analizando archivo:', error)
-        fileResults.valid = false
-        fileResults.signals.push('Error al al analizar qr')
+        throw new Error(`Error analizando archivo: ${error.message}`);
     }
-
-    return fileResults
 }
 
 export { textVsQRAnalyzer }
