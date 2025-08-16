@@ -80,7 +80,11 @@ Crea un archivo .env en la raíz del proyecto y agrega las variables necesarias:
 ```
 PORT=3000
 ```
-#### 5. Ejecutar la API
+#### 5. Crear una carpeta "uploads/"
+
+Debes crear esta carpeta en la raíz del proyecto para guardar ahí los documentos.
+
+#### 6. Ejecutar la API
 ```
 npm start
 ```
