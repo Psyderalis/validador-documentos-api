@@ -86,3 +86,13 @@ npm start
 ```
 ¡Listo! ya puedes usar los endpoints.
 
+### Alcances:
+Para que la aplicación pueda validar correctamente el certificado, la imagen de este debe ser nítida.
+
+### Futuras mejoras:
+* Historial de documentos verificados
+* Comparación visual del archivo contra plantillas válidas
+* Sistema de usuarios con autenticación
+* Dockerizar
+* Pruebas unitarias
+
